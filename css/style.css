@@ -30,10 +30,10 @@ body {
 
 button {
     padding: 12px 18px;
-    color: #2f2118;
+    color: #2f1818;
     font-weight: 700;
     cursor: pointer;
-    background: #ffd166;
+    background: #ffffff;
     border: 0;
     border-radius: 999px;
 }
@@ -41,3 +41,15 @@ button {
 .info {
     padding-left: 1.2rem;
 }
+
+.skip-link { position: absolute; left: -9999px; padding: 8px 12px; color: white; background: #2f2118; }
+.skip-link:focus { top: 8px; left: 8px; }
+.site-header { padding: 16px 20px; background: white; border-bottom: 1px solid #dccbbc; }
+.nav { max-width: 920px; margin: 0 auto; }
+.brand { display: inline-block; margin-bottom: 8px; color: #4b2715; font-weight: 800; text-decoration: none; }
+.nav ul { padding: 0; margin: 0; list-style: none; }
+.nav li { display: inline-block; margin-right: 12px; }
+.nav a[aria-current="page"] { font-weight: 800; }
+a:focus-visible,
+button:focus-visible { outline: 3px solid #2563eb; outline-offset: 3px; }
+.site-footer { padding: 24px 20px; color: white; text-align: center; background: #2f2118; }

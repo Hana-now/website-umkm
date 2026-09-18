@@ -7,23 +7,61 @@
         <link rel="stylesheet" href="css/style.css" />
     </head>
     <body>
-        <main class="page">
-            <section class="hero">
+        <a class="skip-link" href="#konten">Lewati ke konten utama</a>
+        <header class="site-header">
+            <nav class="nav" aria-label="Navigasi Utama">
+                <a class="brand" href="index.html">Seduh Nusantara</a>
+                <ul>
+                    <li><a aria-current="page" href="index.html">Beranda</a></li>
+                    <li><a href="tentang.html">Tentang Kami</a></li>
+                    <li><a href="index.html#kontak">Kontak Singkat</a></li>
+                </ul>
+            </nav> 
+        </header>
+
+        <main id="konten" class="page">
+            <section class="hero" aria-labelledby="hero-title">
                 <p class="eyebrow">UMKM Pekalongan</p>
-                <h1>Seduh Nusantara</h1>
+                <h1 id="hero-title">Seduh Nusantara</h1>
                 <p>Setiap cangkir adalah cerita - kopi lokal pilihan yang diseduh dengan hati, menemani setiap momen belajar, bekerja, dan berdiskusi.</p>
                 <button id="promoButton" type="button">Lihat Promo Hari Ini</button>
+                <img src="assets/images/etalasekopi.jpg" alt="Etalase Kopi Seduh Nusantara kemasan kopi lokal" />
             </section>
 
             <section aria-labelledby="produk-title">
                 <h2 id="produk-title">Produk Unggulan</h2>
-                <ul class="products">
-                    <li> Kopi Gayo - Rp 15.000</li>
-                    <li> Kopi Tubruk - Rp 10.000</li>
-                    <li> Kopi Susu Gula Aren - Rp 18.000</li>
-                    <li> Es Kopi Nusantara - Rp 17.000</li>
-                </ul>
+
+                <div class="product-list">
+                    <article class="product-card">
+                        <img src="assets/images/KopiGayo.jpg" alt="Gambar Kopi Gayo" />
+                        <h3>Kopi Gayo</h3>
+                        <p>Kopi Arabika khas Gayo, Aceh, dengan aroma yang kaya dan rasa yang lembut.</p>
+                        <p class="price">Rp 15.000</p>
+                    </article>
+
+                    <article class="product-card">
+                        <img src="assets/images/KopiTubruk.jpg" alt="Gambar Kopi Tubruk" />
+                        <h3>Kopi Tubruk</h3>
+                        <p>Kopi tradisional khas Indonesia, dengan cita rasa yang khas dan kandungan kafein yang tinggi.</p>
+                        <p class="price">Rp 10.000</p>
+                    </article>
+
+                    <article class="product-card">
+                        <img src="assets/images/KopiSGA.jpg" alt="Gambar Kopi Susu Gula Aren" />
+                        <h3>Kopi Susu Gula Aren</h3>
+                        <p>Minuman kopi susu dengan tambahan gula aren, memberikan rasa manis yang nikmat.</p>
+                        <p class="price">Rp 18.000</p>
+                    </article>
+
+                    <article class="product-card">
+                        <img src="assets/images/EsKopiNusantara.jpg" alt="Gambar Es Kopi Nusantara" />
+                        <h3>Es Kopi Nusantara</h3>
+                        <p>Minuman dingin yang menggabungkan cita rasa kopi dengan cendol, es, dan susu.</p>
+                        <p class="price">Rp 17.000</p>
+                    </article>
+                </div>
             </section>
+
             <section aria-labelledby="info-title">
                 <h2 id="info-title">Jam Buka & Lokasi</h2>
                 <ul class="info">
@@ -31,9 +69,22 @@
                     <li>Sabtu - Minggu: 09.00 - 22.00</li>
                 </ul>
                 <p>Jl. Pahlawan KM 5, Rowolaku, Kec. Kajen, Kabupaten Pekalongan, Jawa Tengah 51161</p>
-                <a href="https://maps.app.goo.gl/16HwbC3v89cwfWYT9" target="_blank" rel="noopener">Lihat di Google Maps</a>
+                <a href="https://maps.app.goo.gl/16HwbC3v89cwfWYT9">Lihat di Google Maps</a>
+            </section>
+
+            <section id="kontak" aria-labelledby="kontak-title">
+                <h2 id="kontak-title">Kontak Singkat</h2>
+                <p><strong>Alamat:</strong> Jl. Pahlawan KM 5, Rowolaku, Kec. Kajen, Kabupaten Pekalongan</p>
+                <p><strong>Jam Layanan:</strong> Senin - Minggu, 09.00 - 20.00</p>
+                <p><strong>WhatsApp:</strong>
+                <a href="https://wa.me/6285956476021">
+                    Hubungi melalui WhatsApp</a>
+                </p>
             </section>
         </main>
+        <footer class="site-footer">
+            <p>&copy; 2026 Seduh Nusantara. Data pada halaman ini bersifat dummy.</p>
+        </footer>
         <script src="js/script.js"></script>
     </body>
 </html>
