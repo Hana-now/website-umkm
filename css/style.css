@@ -53,3 +53,11 @@ button {
 a:focus-visible,
 button:focus-visible { outline: 3px solid #2563eb; outline-offset: 3px; }
 .site-footer { padding: 24px 20px; color: white; text-align: center; background: #2f2118; }
+
+img { max-width: 100%; height: auto; }
+figure { margin: 0 0 24px; }
+figcaption { margin-top: 8px; color: #6b5b52; }
+table { width: 100%; border-collapse: collapse; }
+caption { margin-bottom: 8px; font-weight: 700; text-align: left; }
+th,
+td { padding: 10px; text-align: left; border: 1px solid #dccbbc; }
