@@ -28,12 +28,12 @@ body {
     padding-left: 1.2rem;
 }
 
-button {
+button, #promoButton {
     padding: 12px 18px;
     color: #2f1818;
     font-weight: 700;
     cursor: pointer;
-    background: #ffffff;
+    background:  #c18f30;
     border: 0;
     border-radius: 999px;
 }
@@ -61,3 +61,43 @@ table { width: 100%; border-collapse: collapse; }
 caption { margin-bottom: 8px; font-weight: 700; text-align: left; }
 th,
 td { padding: 10px; text-align: left; border: 1px solid #dccbbc; }
+
+form,
+pre {
+  background: white;
+  border: 1px solid #ead8c3;
+  border-radius: 16px;
+  padding: 18px;
+}
+
+.field {
+  display: grid;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+label,
+legend {
+  font-weight: 700;
+}
+
+input,
+select,
+textarea,
+button {
+  font: inherit;
+  padding: 10px;
+}
+
+fieldset {
+  display: grid;
+  gap: 8px;
+  margin: 0 0 14px;
+  border: 1px solid #ead8c3;
+  border-radius: 12px;
+}
+
+button[type="submit"] {
+    background: #6f3b1f;
+    color: #ffffff;
+}
