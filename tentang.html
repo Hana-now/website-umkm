@@ -11,7 +11,11 @@
         <header class="site-header">
             <nav class="nav" aria-label="Navigasi Utama">
                 <a class="brand" href="index.html">Seduh Nusantara</a>
-                <ul>
+                <button class="nav-toggle" type="button" aria-controls="menu" aria-expanded="false">
+                    <span class="sr-only">Buka menu</span>
+                    <span class="hamburger"></span>
+                </button>
+                <ul id="menu" class="nav-menu">
                     <li><a href="index.html">Beranda</a></li>
                     <li><a aria-current="page" href="tentang.html">Tentang Kami</a></li>
                     <li><a href="produk.html">Produk</a></li>
@@ -42,5 +46,6 @@
         <footer class="site-footer">
             <p>&copy; 2026 Seduh Nusantara. Data pada halaman ini bersifat dummy.</p>
         </footer>
+        <script src="js/app.js" defer></script>
     </body>
 </html>

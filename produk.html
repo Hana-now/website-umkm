@@ -11,7 +11,11 @@
     <header class="site-header">
       <nav class="nav" aria-label="Navigasi utama">
         <a class="brand" href="index.html">Seduh Nusantara</a>
-        <ul>
+        <button class="nav-toggle" type="button" aria-controls="menu" aria-expanded="false">
+          <span class="sr-only">Buka menu</span>
+          <span class="hamburger"></span>
+        </button>
+        <ul id="menu" class="nav-menu">
           <li><a href="index.html">Beranda</a></li>
           <li><a href="tentang.html">Tentang Kami</a></li>
           <li><a aria-current="page" href="produk.html">Produk</a></li>
@@ -83,6 +87,14 @@
         </div>
       </section>
 
+      <section class="section" aria-labelledby="produk-dinamis-title">
+        <div class="section-header">
+          <h2 id="produk-dinamis-title">Produk Kopi Lokal</h2>
+          <p id="produk-ringkasan">Data produk akan dimuat melalui JavaScript.</p>
+        </div>
+        <div id="produk-dinamis" class="js-product-grid"></div>
+      </section>
+
       <section aria-labelledby="harga-title">
         <h2 id="harga-title">Daftar Harga</h2>
         <p>Berikut adalah daftar harga produk kopi lokal yang tersedia di Seduh Nusantara:</p>
@@ -117,6 +129,16 @@
             <td>350ml</td>
             <td>Rp 17.000</td>
           </tr>
+          <tr>
+            <th scope="row">Kopi Robusta</th>
+            <td>200gram</td>
+            <td>Rp 14.000</td>
+          </tr>
+          <tr>
+            <th scope="row">Kopi Susu Pandan</th>
+            <td>250ml</td>
+            <td>Rp 20.000</td>
+          </tr>
         </tbody>
         </table>
       </div>
@@ -126,5 +148,6 @@
     <footer class="site-footer">
       <p>&copy; 2026 Seduh Nusantara. Data pada halaman ini bersifat dummy.</p>
     </footer>
+    <script src="js/app.js" defer></script>
   </body> 
 </html>
