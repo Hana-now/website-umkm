@@ -413,3 +413,8 @@ audio { max-width: 100%; }
   background: #fee2e2;
   color: #991b1b;
 }
+
+#produk-unggulan {
+  font-weight: 700;
+  color: var(--color-primary, #6f3b1f);
+}

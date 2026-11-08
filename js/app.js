@@ -11,18 +11,22 @@ const produkUmkm = [
   { nama: "Kopi Susu Pandan", kategori: "Minuman Kopi", harga: 20000, stok: 4, unggulan: false, diskon: 5 },
 ];
 
-console.table(produkUmkm);
+function formatRupiah(nilai) {
+  return new Intl.NumberFormat("id-ID", {
+    style: "currency",
+    currency: "IDR",
+    maximumFractionDigits: 0,
+  }).format(nilai);
+}
 
-const formatRupiah = new Intl.NumberFormat("id-ID", {
-  style: "currency",
-  currency: "IDR",
-  maximumFractionDigits: 0,
-});
+console.log(formatRupiah(85000));
 
-console.log(formatRupiah.format(produkUmkm[0].harga));
+function hitungHargaAkhir(harga, diskon) {
+  return Math.round(harga * (100 - diskon) / 100);
+}
 
 function statusStok(stok) {
-  if (stok === 0) {
+  if (stok <= 0) {
     return { label: "Habis", className: "empty" };
   }
 
@@ -45,50 +49,69 @@ function labelKategori(kategori) {
       return "Produk UMKM";
   }
 }
+console.log(statusStok(0));
+console.log(statusStok(3));
+console.log(statusStok(12));
+
+function buatKartuProduk(produk) {
+  const status = statusStok(produk.stok);
+  const kategori = labelKategori(produk.kategori);
+  const labelAksi = produk.stok > 0 ? "Siap dipesan" : "Hubungi admin";
+  const labelUnggulan = produk.unggulan ? "Produk unggulan" : "Produk reguler";
+
+  const adaDiskon = produk.diskon > 0;
+  const hargaAkhir = hitungHargaAkhir(produk.harga, produk.diskon);
+  const tampilanHarga = adaDiskon
+    ? `<s>${formatRupiah(produk.harga)}</s> ${formatRupiah(hargaAkhir)}`
+    : formatRupiah(produk.harga);
+  const labelDiskon = adaDiskon ? `Diskon ${produk.diskon}%` : "Tanpa diskon";
+
+  return `
+    <article class="js-product-card">
+      <span class="stock-badge ${status.className}">${status.label}</span>
+      <h3>${produk.nama}</h3>
+      <p>${kategori}</p>
+      <p class="price">${tampilanHarga}</p>
+      <p>${labelDiskon}</p>
+      <p>${labelUnggulan}</p>
+      <p>${labelAksi}</p>
+    </article>
+  `;
+}
+
+console.log(buatKartuProduk(produkUmkm[0]));
+
+produkUmkm.forEach((produk) => {
+  console.log("Debug produk:", produk.nama, "stok:", produk.stok);
+});
 
 function renderProduk() {
   const grid = document.querySelector("#produk-dinamis");
   const ringkasan = document.querySelector("#produk-ringkasan");
+  const unggulan = document.querySelector("#produk-unggulan");
 
   if (!grid || !ringkasan) {
     return;
   }
 
-  let jumlahTersedia = 0;
-  let markup = "";
+  const produkTersedia = produkUmkm.filter((produk) => produk.stok > 0);
+  const produkUnggulan = produkUmkm.find((produk) => produk.unggulan === true);
+  const markupProduk = produkUmkm.map(buatKartuProduk).join("");
 
-  for (const produk of produkUmkm) {
-    const status = statusStok(produk.stok);
-    const kategori = labelKategori(produk.kategori);
-    const labelAksi = produk.stok > 0 ? "Siap dipesan" : "Hubungi admin";
-    const labelUnggulan = produk.unggulan ? "Produk unggulan" : "Produk reguler";
+  console.log("Hasil filter:", produkTersedia);
+  console.log("Jumlah produk tersedia:", produkTersedia.length);
+  console.log("Hasil find:", produkUnggulan);
 
-    const adaDiskon = produk.diskon > 0;
-    const hargaAkhir = Math.round(produk.harga * (100 - produk.diskon) / 100);
-    const tampilanHarga = adaDiskon
-      ? `<s>${formatRupiah.format(produk.harga)}</s> ${formatRupiah.format(hargaAkhir)}`
-      : formatRupiah.format(produk.harga);
-    const labelDiskon = adaDiskon ? `Diskon ${produk.diskon}%` : "Tanpa diskon";
+  grid.innerHTML = markupProduk;
+  ringkasan.textContent = `${produkTersedia.length} produk tersedia dari ${produkUmkm.length} data.`;
 
-    if (produk.stok > 0) {
-      jumlahTersedia = jumlahTersedia + 1;
-    }
-
-    markup = markup + `
-      <article class="js-product-card">
-        <span class="stock-badge ${status.className}">${status.label}</span>
-        <h3>${produk.nama}</h3>
-        <p>${kategori}</p>
-        <p class="price">${tampilanHarga}</p>
-        <p>${labelDiskon}</p>
-        <p>${labelUnggulan}</p>
-        <p>${labelAksi}</p>
-      </article>
-    `;
+  if (unggulan) {
+    unggulan.textContent = produkUnggulan
+      ? `Produk unggulan: ${produkUnggulan.nama}`
+      : "Belum ada produk unggulan.";
   }
 
-  grid.innerHTML = markup;
-  ringkasan.textContent = `${jumlahTersedia} produk tersedia dari ${produkUmkm.length} data.`;
+  console.table(produkUmkm);
 }
 
 document.addEventListener("DOMContentLoaded", renderProduk);
