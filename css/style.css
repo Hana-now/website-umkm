@@ -29,7 +29,10 @@
   box-sizing: border-box;
 }
 
-html { color-scheme: light; }
+html {
+  color-scheme: light;
+  scroll-padding-top: 5rem; /*P11:anchor tidak tertutup navbar sticky */
+}
 
 body {
   margin: 0;
@@ -57,11 +60,11 @@ li { max-width: 68ch; }
 .page {
     max-width: 920px;
     margin: 0 auto;
-    padding: 2rem clamp(1rem, 4vw, 1.25rem); /* P07: nilai fluida */
+    padding: 2rem clamp(1rem, 4vw, 1.25rem);
 }
 
 .hero {
-    padding: clamp(1.5rem, 5vw, 2.25rem); /* P07: nilai fluida */
+    padding: clamp(1.5rem, 5vw, 2.25rem);
     color: #fff;
     background-color: #6f3b1f;
     border-radius: 24px;
@@ -111,9 +114,17 @@ button:hover { filter: brightness(0.92); }
     padding-left: 1.2rem;
 }
 
-.skip-link { position: absolute; left: -9999px; padding: 8px 12px; color: white; background: #2f2118; }
+.skip-link { z-index: 200; position: absolute; left: -9999px; padding: 8px 12px; color: white; background: #2f2118; }
 .skip-link:focus { top: 8px; left: 8px; }
-.site-header { padding: 16px 20px; background: #172554; border-bottom: 4px solid var(--color-accent-strong); }
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: 16px 20px;
+  background: #172554;
+  border-bottom: 4px solid var(--color-accent-strong);
+  box-shadow: 0 0.25rem 0.75rem rgb(23 37 84 / 0.25);
+}
 .nav { max-width: 920px; margin: 0 auto; }
 .brand { display: inline-block; margin-bottom: 8px; color: #ffffff; font-weight: 800; text-decoration: none; }
 .brand:hover { color: #f5d28a; }
@@ -417,4 +428,97 @@ audio { max-width: 100%; }
 #produk-unggulan {
   font-weight: 700;
   color: var(--color-primary, #6f3b1f);
+}
+
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-block: 1rem 1.5rem;
+}
+
+.filter-button {
+  border: 1px solid var(--color-border, #cbd5e1);
+  border-radius: 999px;
+  background: #ffffff;
+  color: var(--color-text, #1f2937);
+  padding: 0.65rem 1rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.filter-button:hover,
+.filter-button:focus-visible {
+  border-color: var(--color-primary, #2563eb);
+  outline: 3px solid rgb(37 99 235 / 20%);
+  outline-offset: 2px;
+}
+
+.filter-button.is-active {
+  background: var(--color-primary, #2563eb);
+  border-color: var(--color-primary, #2563eb);
+  color: #ffffff;
+}
+
+.empty-state {
+  grid-column: 1 / -1;
+  border: 1px dashed #94a3b8;
+  border-radius: 1rem;
+  padding: 1rem;
+  background: #ffffff;
+  color: #64748b;
+}
+
+/*P11:kartu produk hasil render DOM */
+.produk-status { font-weight: 700; color: var(--color-muted); }
+
+.category-note {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 0.9rem;
+}
+
+.price s {
+  margin-right: var(--space-1);
+  color: var(--color-muted);
+  font-weight: 400;
+}
+
+.product-card .stock-badge { align-self: flex-start; margin-block-end: var(--space-2); }
+
+.ghost-button {
+  align-self: flex-start;
+  margin-top: var(--space-2);
+  padding: 0.4rem 0.9rem;
+  background: transparent;
+  border: 1px solid var(--color-border);
+  font-size: 0.875rem;
+}
+
+/*P11 pengayaan: filter stok + penghitung */
+.filter-label {
+  margin: var(--space-3) 0 0;
+  font-weight: 800;
+  font-size: 0.875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+.filter-label + .filter-bar { margin-block-start: var(--space-1); }
+
+.produk-penghitung {
+  font-weight: 700;
+  color: var(--color-primary-strong);
+}
+
+.discount-badge {
+  display: inline-block;
+  margin-left: var(--space-2);
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  background: #fee2e2;
+  color: #991b1b;
+  font-size: 0.8rem;
+  font-weight: 800;
+  vertical-align: middle;
 }
