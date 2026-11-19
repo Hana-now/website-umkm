@@ -29,34 +29,40 @@
         <main id="konten" class="page">
             <h1>Kontak Seduh Nusantara</h1>
             <p>Jika Anda memiliki pertanyaan, saran, atau ingin berkolaborasi dengan kami, jangan ragu untuk menghubungi kami melalui informasi kontak di bawah ini.</p>
-            <form id="form-kontak" action="#" method="post">
+            <form id="form-kontak" action="#" method="post" novalidate>
                 <div class="field">
                     <label for="nama">Nama Lengkap:</label>
-                    <input id="nama" name="nama" type="text" autocomplete="name" required minlength="3" placeholder="Contoh: Hana Sabila" />
+                    <input id="nama" name="nama" type="text" autocomplete="name" required minlength="3" placeholder="Contoh: Hana Sabila" aria-describedby="nama-error" />
+                    <p id="nama-error" class="field-error" aria-live="polite"></p>
                 </div>
                 <div class="field">
                     <label for="email">Email:</label>
-                    <input id="email" name="email" type="email" autocomplete="email" required placeholder="Contoh: nama@example.com" />
+                    <input id="email" name="email" type="email" autocomplete="email" required placeholder="Contoh: nama@example.com" aria-describedby="email-error" />
+                    <p id="email-error" class="field-error" aria-live="polite"></p>
                 </div>
                 <div class="field">
                     <label for="whatsapp">WhatsApp:</label>
-                    <input id="whatsapp" name="whatsapp" type="tel" autocomplete="tel" placeholder="Contoh: 08123456789" />
+                    <input id="whatsapp" name="whatsapp" type="tel" autocomplete="tel" placeholder="Contoh: 628123456789" pattern="(62)8[0-9]{8,12}" aria-describedby="whatsapp-error" />
+                    <p id="whatsapp-error" class="field-error" aria-live="polite"></p>
                 </div>
                 <div class="field">
                     <label for="paket">Paket yang diminati:</label>
-                    <select id="paket" name="paket" required>
+                    <select id="paket" name="paket" required aria-describedby="paket-error">
                         <option value="">Pilih paket</option>
                         <option value="unggulan">Kopi Unggulan</option>
                         <option value="tradisional">Kopi Tradisional</option>
                         <option value="minuman">Minuman Kopi </option>
                     </select>
+                    <p id="paket-error" class="field-error" aria-live="polite"></p>
                 </div>
-                <fieldset>
+                <fieldset aria-describedby="topik-error">
                     <legend>Topik pertanyaan</legend>
                     <label><input type="radio" name="topik" value="produk" required/> Produk</label>
                     <label><input type="radio" name="topik" value="layanan" /> Layanan</label>
                     <label><input type="radio" name="topik" value="kerjasama" /> Kerja Sama</label>
+                    <p id="topik-error" class="field-error" aria-live="polite"></p>
                 </fieldset>
+                <!--krn waktu kontak opsional/tdk ada required, jdi tdk ada error-->
                 <fieldset>
                     <legend>Waktu kontak yang diinginkan</legend>
                     <label><input type="radio" name="waktu" value="pagi" /> Pagi (08.00-12.00)</label>
@@ -65,19 +71,61 @@
                 </fieldset>
                 <div class="field">
                     <label for="pesan">Pesan:</label>
-                    <textarea id="pesan" name="pesan" rows="5" required minlength="10" placeholder="Tulis pertanyaan atau pesan Anda di sini..."></textarea>
+                    <textarea id="pesan" name="pesan" rows="5" required minlength="20" placeholder="Tulis pertanyaan atau pesan Anda di sini..." aria-describedby="pesan-error"></textarea>
+                    <p id="pesan-error" class="field-error" aria-live="polite"></p>
+                </div>
+                <!--persetujuan wajib: data dummy boleh dipreview -->
+                <div class="field">
+                    <label><input id="setuju" type="checkbox" name="setuju" required aria-describedby="setuju-error" /> Saya setuju data dummy ini ditampilkan sebagai preview.</label>
+                    <p id="setuju-error" class="field-error" aria-live="polite"></p>
                 </div>
                 <button type="submit">Kirim Pesan</button>
+                <!--status umum form (error/sukses/preferensi): class "success" membuatnya hijau -->
+                 <p id="form-feedback" class="form-feedback" aria-live="polite"></p>
             </form>
 
+            <!--panel preferensi: menyimpan paket, topik, dan channel ke localStorage (key kopi-nusa-preferensi-kontak) -->
+            <section class="pref-panel" aria-labelledby="pref-title">
+                <h2 id="pref-title">Preferensi</h2>
+                <label><input type="checkbox" value="email" data-channel /> Email</label>
+                <label><input type="checkbox" value="whatsapp" data-channel /> WhatsApp</label>
+                <div class="pref-actions">
+                    <button type="button" id="simpan-preferensi">Simpan Preferensi</button>
+                    <button type="button" id="hapus-preferensi">Hapus Preferensi</button>
+                </div>
+            </section>
+
+            <!--preview hanya diisi form.js setelah semua field valid -->
             <section aria-labelledby="preview-title">
                 <h2 id="preview-title">Preview Data</h2>
                 <pre id="preview-form" aria-live="polite">Data form akan muncul setelah tombol dikirim.</pre>
+            </section>
+
+            <!--newsletter (js/newsletter.js): email divalidasi tapi TIDAK disimpan, hanya pilihan minat -->
+            <section class="newsletter" aria-labelledby="news-title">
+                <h2 id="news-title">Kabar Seduh Nusantara</h2>
+                <p>Pilih kabar yang ingin diterima. Hanya pilihan minat yang disimpan di browser ini, email tidak disimpan.</p>
+                <form id="form-newsletter" novalidate>
+                    <div class="field">
+                        <label for="news-email">Email:</label>
+                        <input id="news-email" name="email" type="email" autocomplete="email" required aria-describedby="news-email-error" />
+                        <p id="news-email-error" class="field-error" aria-live="polite"></p>
+                    </div>
+                    <fieldset>
+                        <legend>Minat</legend>
+                        <label><input type="checkbox" value="promo" data-minat /> Promo</label>
+                        <label><input type="checkbox" value="produk-baru" data-minat /> Produk baru</label>
+                        <label><input type="checkbox" value="event" data-minat /> Event</label>
+                    </fieldset>
+                    <button type="submit">Simpan Preferensi Newsletter</button>
+                    <p id="news-status" class="form-feedback" aria-live="polite"></p>
+                </form>
             </section>
         </main>
         <footer class="site-footer">
             <p>&copy; 2026 Seduh Nusantara. Data pada halaman ini bersifat dummy.</p>
         </footer>
         <script src="js/app.js" defer></script>
+        <script src="js/newsletter.js" defer></script>
     </body>
 </html>
